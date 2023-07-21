@@ -17,5 +17,6 @@
     ],
     "ignorePatterns": ["**/build/*", "**/node_modules/*", "**/public/*"],
     "rules": {
+        "@typescript-eslint/no-unused-vars": "warn"
     }
 }
