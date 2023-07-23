@@ -5,24 +5,41 @@ const getTodos = async (req: Request, res: Response) => {
   const { id } = req.app.locals.user;
   try {
     const todos = await todosService.getTodosFromDatabase(id);
-    res.status(200).json({ status: "found", message: todos });
+    return res.status(200).json({ status: "found", message: todos });
   } catch (error) {
-    res.status(400).json({ status: "fail", message: "not u" });
+    return res.status(400).json({ status: "fail", message: "not u" });
+  }
+};
+
+const getTodosById = async (req: Request, res: Response) => {
+  const todoId = req.params.todoId;
+
+  try {
+    const todos = await todosService.getTodosById(todoId);
+
+    if (!todos) {
+      return res.status(200).json({ status: "fail", message: "gada" });
+    }
+
+    return res.status(200).json({ status: "found", message: todos });
+  } catch (error) {
+    return res.status(400).json({ status: "fail", message: "not u" });
   }
 };
 
 const createTodos = async (req: Request, res: Response) => {
   try {
     const todos = await todosService.createTodosToDatabase(req.body);
-    res.status(201).json({ message: todos });
+    return res.status(201).json({ message: todos });
   } catch (error) {
-    res.status(400).json({ message: "not u" });
+    return res.status(400).json({ message: "not u" });
   }
 };
 
 const todosController = {
   getTodos,
   createTodos,
+  getTodosById,
 };
 
 export default todosController;

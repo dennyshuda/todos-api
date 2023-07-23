@@ -22,9 +22,16 @@ const createTodosToDatabase = async (newTodo: NewTodoProps) => {
   return query;
 };
 
+const getTodosById = async (todoId: string) => {
+  const query = await prisma.todos.findUnique({ where: { id: todoId } });
+
+  return query;
+};
+
 const todosService = {
   getTodosFromDatabase,
   createTodosToDatabase,
+  getTodosById,
 };
 
 export default todosService;
