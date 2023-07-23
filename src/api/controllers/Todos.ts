@@ -36,10 +36,21 @@ const createTodos = async (req: Request, res: Response) => {
   }
 };
 
+const deleteTodosById = async (req: Request, res: Response) => {
+  const todoId = req.params.todoId;
+  try {
+    const todos = await todosService.deleteTodosById(todoId);
+    return res.status(200).json({ message: "succes delete" });
+  } catch (error) {
+    return res.status(400).json({ message: "not u" });
+  }
+};
+
 const todosController = {
   getTodos,
   createTodos,
   getTodosById,
+  deleteTodosById,
 };
 
 export default todosController;

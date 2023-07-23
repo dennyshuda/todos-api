@@ -28,10 +28,21 @@ const getTodosById = async (todoId: string) => {
   return query;
 };
 
+const deleteTodosById = async (todoId: string) => {
+  const query = await prisma.todos.delete({
+    where: {
+      id: todoId,
+    },
+  });
+
+  return query;
+};
+
 const todosService = {
   getTodosFromDatabase,
   createTodosToDatabase,
   getTodosById,
+  deleteTodosById,
 };
 
 export default todosService;
