@@ -11,8 +11,18 @@ const getTodos = async (req: Request, res: Response) => {
   }
 };
 
+const createTodos = async (req: Request, res: Response) => {
+  try {
+    const todos = await todosService.createTodosToDatabase(req.body);
+    res.status(201).json({ message: todos });
+  } catch (error) {
+    res.status(400).json({ message: "not u" });
+  }
+};
+
 const todosController = {
   getTodos,
+  createTodos,
 };
 
 export default todosController;

@@ -5,5 +5,6 @@ import verifyToken from "../middlewares/VerifyToken";
 const TodosRouter = Router();
 
 TodosRouter.get("/view", verifyToken, todosController.getTodos);
+TodosRouter.post("/create", verifyToken, todosController.createTodos);
 
 export default TodosRouter;
