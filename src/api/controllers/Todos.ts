@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import todosService from "../services/Todos";
-import { prisma } from "../db";
 
 const getTodos = async (req: Request, res: Response) => {
   const { id } = req.app.locals.user;
