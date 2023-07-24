@@ -4,10 +4,10 @@ import verifyToken from "../middlewares/VerifyToken";
 
 const TodosRouter = Router();
 
-TodosRouter.get("/view", verifyToken, todosController.getTodos);
-TodosRouter.post("/create", verifyToken, todosController.createTodos);
-TodosRouter.get("/view/:todoId", verifyToken, todosController.getTodosById);
-TodosRouter.delete("/delete/:todoId", verifyToken, todosController.deleteTodosById);
-TodosRouter.put("/update/:todoId", verifyToken, todosController.updateTodos);
+TodosRouter.get("/todos", verifyToken, todosController.getTodos);
+TodosRouter.post("/todos", verifyToken, todosController.createTodos);
+TodosRouter.get("/todos/:todoId", verifyToken, todosController.getTodosById);
+TodosRouter.delete("/todos/:todoId", verifyToken, todosController.deleteTodosById);
+TodosRouter.put("/todos/:todoId", verifyToken, todosController.updateTodos);
 
 export default TodosRouter;
