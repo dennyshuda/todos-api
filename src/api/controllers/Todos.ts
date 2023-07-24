@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import todosService from "../services/Todos";
+import { prisma } from "../db";
 
 const getTodos = async (req: Request, res: Response) => {
   const { id } = req.app.locals.user;
@@ -47,11 +48,24 @@ const deleteTodosById = async (req: Request, res: Response) => {
   }
 };
 
+const updateTodos = async (req: Request, res: Response) => {
+  const todoId = req.params.todoId;
+  const { title, description } = req.body;
+  const { id } = req.app.locals.user;
+  try {
+    const todos = await todosService.updateTodos({ todoId, title, description, id });
+    return res.status(200).json({ message: "succes update", data: todos });
+  } catch (error) {
+    return res.status(400).json({ message: "there is a mistake" });
+  }
+};
+
 const todosController = {
   getTodos,
   createTodos,
   getTodosById,
   deleteTodosById,
+  updateTodos,
 };
 
 export default todosController;

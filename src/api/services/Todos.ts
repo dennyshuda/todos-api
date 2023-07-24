@@ -6,6 +6,13 @@ type NewTodoProps = {
   description: string;
 };
 
+type UpdateTodosProps = {
+  todoId: string;
+  id: string;
+  title: string;
+  description: string;
+};
+
 const getTodosFromDatabase = async (id: string) => {
   const query = await prisma.user.findFirst({ where: { id: id } }).myTodos();
 
@@ -34,11 +41,26 @@ const deleteTodosById = async (todoId: string) => {
   return query;
 };
 
+const updateTodos = async (todos: UpdateTodosProps) => {
+  const query = await prisma.todos.update({
+    where: {
+      id: todos.todoId,
+      authorId: todos.id,
+    },
+    data: {
+      title: todos.title,
+      description: todos.description,
+    },
+  });
+  return query;
+};
+
 const todosService = {
   getTodosFromDatabase,
   createTodosToDatabase,
   getTodosById,
   deleteTodosById,
+  updateTodos,
 };
 
 export default todosService;
