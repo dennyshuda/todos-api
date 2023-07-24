@@ -7,7 +7,7 @@ type NewTodoProps = {
 };
 
 const getTodosFromDatabase = async (id: string) => {
-  const query = await prisma.user.findUnique({ where: { id: id } }).myTodos();
+  const query = await prisma.user.findFirst({ where: { id: id } }).myTodos();
 
   return query;
 };
@@ -18,8 +18,8 @@ const createTodosToDatabase = async (newTodo: NewTodoProps) => {
   return query;
 };
 
-const getTodosById = async (todoId: string) => {
-  const query = await prisma.todos.findUnique({ where: { id: todoId } });
+const getTodosById = async (props: { id: string; todoId: string }) => {
+  const query = await prisma.todos.findUnique({ where: { id: props.todoId, authorId: props.id } });
 
   return query;
 };
