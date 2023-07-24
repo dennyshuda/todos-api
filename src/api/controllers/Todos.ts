@@ -5,9 +5,9 @@ const getTodos = async (req: Request, res: Response) => {
   const { id } = req.app.locals.user;
   try {
     const todos = await todosService.getTodosFromDatabase(id);
-    return res.status(200).json({ status: "found", message: todos });
+    return res.status(200).json({ status: "found", data: todos });
   } catch (error) {
-    return res.status(400).json({ status: "fail", message: "not u" });
+    return res.status(400).json({ status: "fail", message: "something wrong to get ypur data" });
   }
 };
 

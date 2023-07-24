@@ -7,11 +7,7 @@ type NewTodoProps = {
 };
 
 const getTodosFromDatabase = async (id: string) => {
-  const query = await prisma.todos.findMany({
-    where: {
-      authorId: id,
-    },
-  });
+  const query = await prisma.user.findUnique({ where: { id: id } }).myTodos();
 
   return query;
 };
